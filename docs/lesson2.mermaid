@@ -1,0 +1,44 @@
+stateDiagram-v2
+    [*] --> Start
+
+    Start --> Thinking
+
+    Thinking --> BashNormal
+    Thinking --> WebSearchNormal
+    Thinking --> FileNormal
+
+    state BashNormal {
+        [*] --> Execute
+    }
+    BashNormal --> FinishNormal : 成功
+    BashNormal --> BashRetry : 可恢复错误
+    BashNormal --> BashFatal : 不可恢复错误
+
+    BashRetry --> BashNormal : 指数退避后重试
+
+    BashFatal --> Terminal
+
+    state WebSearchNormal {
+        [*] --> Execute
+    }
+    WebSearchNormal --> FinishNormal : 成功
+    WebSearchNormal --> WebSearchRetry : 429 (可恢复，指数退避)
+    WebSearchNormal --> WebSearchFatal : Token 耗尽 (不可恢复)
+
+    WebSearchRetry --> WebSearchNormal : 指数退避后重试
+
+    WebSearchFatal --> Terminal
+
+    state FileNormal {
+        [*] --> Execute
+    }
+    FileNormal --> FinishNormal : 成功
+    FileNormal --> FileRetry : 可恢复错误
+    FileNormal --> FileFatal : 不可恢复错误
+
+    FileRetry --> FileNormal : 指数退避后重试
+
+    FileFatal --> Terminal
+
+    FinishNormal --> [*]
+    Terminal --> [*]

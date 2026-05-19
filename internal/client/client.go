@@ -1,5 +1,7 @@
-package main
-
+package client
+/*
+* DeepSeek的Client，目的是向deepseek发送请求并且得到响应
+*/
 import (
 	"bytes"
 	"context"
@@ -9,7 +11,6 @@ import (
 	"net/http"
 )
 
-// 可以向Deepseek发请求的结构体
 type DeepSeekClient struct {
 	APIKey  string
 	BaseURL string
@@ -75,7 +76,6 @@ func (c *DeepSeekClient) Chat(
 		c.BaseURL+"/chat/completions",
 		bytes.NewBuffer(data),
 	)
-
 	if err != nil {
 		return nil, err
 	}

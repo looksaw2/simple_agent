@@ -1,50 +1,22 @@
-# Simple Agent with Go
+## Simple Agent With Golang
 
-从零开始，用 Go 构建一个最小化的 AI Agent，逐步理解 Agent 的底层原理。
+[![Go Report Card](https://goreportcard.com/badge/github.com/ozgurcd/gograph)](https://goreportcard.com/report/github.com/ozgurcd/gograph)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 项目概述
+![rabbit in washing machine](./img/rabbit_in_washing_machine.png)
 
-这是一个教学项目，通过有限状态机（Finite State Machine）驱动 Agent 的行为，对接 DeepSeek API 实现 LLM 调用和工具调用（Tool Calling）。
 
-核心组件：
+## simple agnet  - ⚡️ 一个简单的Agent
+`simple-agent-with-golang`是一个从零开始使用golang语言搭建的🙌🙌Agent，其目的是为了逐步的向大家揭开Agent的具体实现的流程和如何去具体的实现，并且跟着我一步一步的迭代，可以从一个最简单的可以符合直觉的Agent逐步的搭建出一个具有现代功能的Agent。
 
-- **状态机**：`Start → Thinking → Tool/Finish → Finish`，清晰的状态转移模型
-- **DeepSeek Client**：封装对 DeepSeek Chat API 的 HTTP 调用
-- **Tool Registry**：可扩展的工具注册与调用框架
-- **Bash Tool**：内置首个工具，支持执行 shell 命令
++ ʕ◔ϖ◔ʔgolang来搭建对应的Agent，因为我们喜欢ʕ◔ϖ◔ʔ讨厌🐍
++ 😘尽可能的减少库的依赖，让人更好的理解Agent
++ 🙌🙌跟着我逐步添加功能
 
-## 项目结构
 
+## How to use
+直接运行
 ```
-.
-├── cmd/
-│   ├── main.go      # Agent 状态机、Handler、主入口
-│   ├── client.go    # DeepSeek API 客户端
-│   ├── tool.go      # Tool 接口定义
-│   ├── registry.go  # 工具注册表
-│   └── bash.go      # Bash 工具实现
-├── docs/
-│   └── lesson1.md   # Lesson 1：从零构建最小 Agent
-├── img/
-│   └── lesson1_state_transform.svg  # 状态转移图
-└── go.mod
+go run ./cmd
 ```
-
-## 快速开始
-
-```bash
-# 设置 API Key
-export DEEPSEEK_API_KEY="your-api-key"
-
-# 运行
-go run ./cmd/...
-```
-
-## 学习路线
-
-- **Lesson 1**：搭建最小可运行 Agent —— 状态机、工具抽象、Bash 工具
-- 更多 Lesson 持续施工中...
-
-## License
-
-MIT
+就可以了

@@ -9,5 +9,10 @@ const(
 	//System最高角色
 	SystemRole Role = "system"
 	//用户角色
+	UserRole Role = "user"
+	//
+	AssitantRole Role = "assitant"
+	//
+	TooRole Role = "tool"
 	
-)=
+)

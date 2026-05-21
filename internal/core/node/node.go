@@ -6,8 +6,8 @@ import (
 	"github.com/looksaw/simple_agent_with_golang/internal/core/types"
 )
 
-//对于Node的抽象
+// 对于Node的抽象
 type Node interface {
 	ID() types.NodeID
-	Execute(ctx context.Context , input types.Map)(types.Map,error)
+	Execute(ctx context.Context, input types.Map) (types.Map, error)
 }

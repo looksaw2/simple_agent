@@ -6,12 +6,23 @@ import "context"
 type Model interface {
 	//发送消息
 	Generate(ctx context.Context, req *Request) (*Response, error)
-	//发送流式消息
-	Stream(ctx context.Context, req *Request) (<-chan Chunk, error)
 }
 
 // Chunk的定义
 type Chunk struct {
+	RoleDelta     string
 	ContentDelta  string
-	ToolCallDelat *ToolCall
+	ToolCallDelta *ToolCallDelta
+	FinishReason  *string
+}
+
+// Stream的定义
+type Stream interface {
+	Recv() (*Chunk, error)
+	Close() error
+}
+
+type StreamingModel interface {
+	Model
+	Stream(ctx context.Context, req *Request) (Stream, error)
 }

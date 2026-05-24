@@ -27,7 +27,7 @@ func main() {
 	registry := tool.NewRegistry()
 	//注册一个内建工具(目前只有Bash)
 	if err := registry.Register(builtin.NewBashTool()); err != nil {
-		log.Fatal("failed to registr bash tool %v",err)
+		log.Fatalf("failed to register bash tool: %v", err)
 	}
 	//初始化模型
 	model := deepseek.NewClient(
@@ -43,7 +43,7 @@ func main() {
 		"You are an assitant, help me to do some thing useful",
 	)
 	if err != nil {
-		log.Fatal("create graph is failed ..... %v",err)
+		log.Fatalf("create graph failed: %v", err)
 	}
 	//装载runtime
 	rt := runtime.NewRuntime(cg)

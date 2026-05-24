@@ -9,6 +9,10 @@ import (
 
 type BashTool struct{}
 
+func NewBashTool() *BashTool {
+	return &BashTool{}
+}
+
 func (b *BashTool) Name() string {
 	return "bash"
 }

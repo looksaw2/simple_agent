@@ -59,8 +59,10 @@ func (g *StateGraph) AddConditionalEdge(from types.NodeID, conditionalFunc edge.
 //开始编译化整个状态图
 func (g *StateGraph) Compile() (*CompiledGraph, error) {
 	if _, hasStart := g.nodes[types.Start]; !hasStart {
-		if _, hasCondStart := g.conditionalEdge[types.Start]; !hasCondStart {
-			return nil, fmt.Errorf("graph must have a starting edge from types.START")
+		if _, hasEdgeStart := g.edge[types.Start]; !hasEdgeStart {
+			if _, hasCondStart := g.conditionalEdge[types.Start]; !hasCondStart {
+				return nil, fmt.Errorf("graph must have a starting edge from types.START")
+			}
 		}
 	}
 	return &CompiledGraph{sg: g}, nil

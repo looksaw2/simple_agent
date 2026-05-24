@@ -68,7 +68,7 @@ func (c *Client) Generate(ctx context.Context,
 	//然后把API KEY加上去
 	httpReq.Header.Set(
 		"Authorization",
-		"Bear "+c.APiKey,
+		"Bearer "+c.APiKey,
 	)
 	//然后是JSON的输出
 	httpReq.Header.Set(
@@ -82,9 +82,10 @@ func (c *Client) Generate(ctx context.Context,
 	}
 	defer resp.Body.Close()
 	//如果发生400以上的错误，目前直接报错，后面还会有处理措施的
-	if resp.StatusCode >= 400 {
-		return nil, fmt.Errorf("deepseek api error : %v", err)
-	}
+		if resp.StatusCode >= 400 {
+			body, _ := io.ReadAll(resp.Body)
+			return nil, fmt.Errorf("deepseek api error (status %d): %s", resp.StatusCode, string(body))
+		}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err

@@ -22,11 +22,12 @@ type DeepSeekChatResponse struct {
 
 // DeepSeek的Message定义
 type DeepSeekChatMessage struct {
-	Role       string             `json:"role"`
-	Content    string             `json:"content,omitempty"`
-	ToolCalls  []DeepSeekToolCall `json:"tool_calls,omitempty"`
-	ToolCallID string             `json:"tool_call_id,omitempty"`
-	Name       string             `json:"name,omitempty"`
+	Role             string             `json:"role"`
+	Content          string             `json:"content,omitempty"`
+	ReasoningContent string             `json:"reasoning_content,omitempty"`
+	ToolCalls        []DeepSeekToolCall `json:"tool_calls,omitempty"`
+	ToolCallID       string             `json:"tool_call_id,omitempty"`
+	Name             string             `json:"name,omitempty"`
 }
 type DeepSeekToolCall struct {
 	ID       string           `json:"id"`
@@ -35,7 +36,7 @@ type DeepSeekToolCall struct {
 }
 type DeepSeekFunction struct {
 	Name      string            `json:"name"`
-	Arguments map[string]string `json:"arguments"`
+	Arguments string `json:"arguments"`
 }
 
 // Deepseek的流式传输
@@ -109,11 +110,12 @@ func toDeepSeekMessage(
 		)
 	}
 	return DeepSeekChatMessage{
-		Role:       string(m.Role),
-		Content:    m.Content,
-		ToolCalls:  toolCalls,
-		ToolCallID: m.ToolCallID,
-		Name:       m.Name,
+		Role:             string(m.Role),
+		Content:          m.Content,
+		ReasoningContent: m.ReasoningContent,
+		ToolCalls:        toolCalls,
+		ToolCallID:       m.ToolCallID,
+		Name:             m.Name,
 	}
 }
 func toDeepSeekToolCall(
@@ -157,11 +159,12 @@ func fromDeepSeekMessage(
 	}
 
 	return llm.Message{
-		Role:       llm.Role(m.Role),
-		Content:    m.Content,
-		ToolCalls:  toolCalls,
-		ToolCallID: m.ToolCallID,
-		Name:       m.Name,
+		Role:             llm.Role(m.Role),
+		Content:          m.Content,
+		ReasoningContent: m.ReasoningContent,
+		ToolCalls:        toolCalls,
+		ToolCallID:       m.ToolCallID,
+		Name:             m.Name,
 	}
 }
 func fromDeepSeekToolCall(

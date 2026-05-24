@@ -9,7 +9,7 @@ type ToolCall struct {
 
 type FunctionCall struct {
 	Name      string            `json:"name"`
-	Arguments map[string]string `json:"arguments"`
+	Arguments string `json:"arguments"`
 }
 
 type ToolCallDelta struct {
